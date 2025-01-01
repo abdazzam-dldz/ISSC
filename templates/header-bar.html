@@ -1,0 +1,38 @@
+{% load static %}
+
+<!-- Headerbar -->
+<div id="header-bar">
+  <!-- Navigation -->
+  <nav>
+    <a href="#" class="nav-link">Header</a>
+    <form action="#">
+      <div class="form-input">
+        <input type="search" placeholder="Search..." />
+        <button type="submit" class="search-btn">
+          <i class="bx bx-search"></i>
+        </button>
+      </div>
+    </form>
+    <a href="#" class="dark-mode">
+      <ion-icon name="moon-outline"></ion-icon>
+      <span style="--i: 8"></span>
+    </a>
+    <a href="#" class="notification">
+      <i class="bx bxs-bell"></i>
+      <span class="num">8</span>
+    </a>
+    <!-- Logged In -->
+    {% if request.user.is_authenticated %}
+    <a href="#" class="profile">
+      <img src="{% static 'images/profile_pic.jpeg' %}" />
+    </a>
+    {% else %}
+    <!-- Not Logged In -->
+    <a href="{% url 'login' %}">
+      <!-- <img src="{% static 'images/avatar.svg' %}" /> -->
+      <p>Login</p>
+    </a>
+    {% endif %}
+  </nav>
+  <!-- Navbar -->
+</div>

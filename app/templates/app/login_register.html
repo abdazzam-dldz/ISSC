@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ISSC</title>
+    <link rel="stylesheet" href="{% static 'styles/loginregis.css' %}" />
+  </head>
+  <body>
+
+    <!-- LOGIN -->
+    {% if page == 'login' %}
+    <div class="login_form">
+      <form action="" method="POST">
+        {% csrf_token %}
+        <h3>Masuk menggunakan</h3>
+
+        <div class="login_option">
+          <div class="option">
+            <a href="#">
+              <img src="{% static 'images/logos/google.png' %}" alt="Google" />
+              <span>Google</span>
+            </a>
+          </div>
+          <!-- <div class="option">
+        <a href="#">
+          <img src="{% static 'images/logos/apple.png' %}" alt="Apple" />
+          <span>Apple</span>
+        </a>
+      </div> -->
+        </div>
+
+        <p class="separator">
+          <span>atau</span>
+        </p>
+
+        {% for message in messages %}
+        <p class="alert">{{ message }}</p>
+        {% endfor %}
+
+        <div class="input_box">
+          <label for="email">Email</label>
+          <input
+            name="email"
+            type="text"
+            id="username"
+            placeholder="input email anda"
+          />
+        </div>
+
+        <div class="input_box">
+          <div class="password_title">
+            <label for="password">Password</label>
+            <a href="#">Lupa Password?</a>
+          </div>
+
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="input password anda"
+          />
+        </div>
+
+        <button type="submit">Masuk</button>
+
+        <p class="sign_up">
+          Belum memiliki akun? <a href="{% url 'register' %}">Daftar.</a>
+        </p>
+      </form>
+    </div>
+    
+    <!-- REGISTER -->
+    {% else %}
+    <div class="login_form">
+      <!-- Login form container -->
+      <form action="" method="POST">
+        {% csrf_token %}
+        <h3>Daftar menggunakan</h3>
+
+        <div class="login_option">
+          <!-- Google button -->
+          <div class="option">
+            <a href="#">
+              <img src="{% static 'images/logos/google.png' %}" alt="Google" />
+              <span>Google</span>
+            </a>
+          </div>
+
+          <!-- Apple button -->
+          <!-- <div class="option">
+            <a href="#">
+              <img src="{% static 'images/logos/apple.png' %}" alt="Apple" />
+              <span>Apple</span>
+            </a>
+          </div> -->
+        </div>
+
+        <!-- Register option separator -->
+        <p class="separator">
+          <span>atau</span>
+        </p>
+
+        {% for message in messages %}
+        <p class="alert">{{ message }}</p>
+        <br>
+        {% endfor %}
+
+
+        {% for field in form %}
+        <!-- Email input box -->
+        <div class="input_box">
+          <label for="{{field.label}}">{{field.label}}</label>
+          {{field}}
+        </div>
+        {% endfor %}
+
+        <!-- Login button -->
+        <button type="submit">Daftar</button>
+
+        <p class="sign_up">
+          Sudah memiliki akun? <a href="{% url 'login' %}">Masuk.</a>
+        </p>
+      </form>
+    </div>
+    {% endif %}
+    
+  </body>
+</html>
