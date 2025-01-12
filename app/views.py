@@ -57,5 +57,8 @@ def registerPage(request):
     return render(request, 'app/login_register.html', context)
 
 def logoutUser(request):
-        logout(request)
-        return redirect('home')
+    logout(request)
+    return redirect('home')
+
+def userProfile(request):
+    return render(request, 'app/profile.html')

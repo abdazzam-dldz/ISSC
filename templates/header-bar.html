@@ -1,6 +1,5 @@
 {% load static %}
 
-<!-- Headerbar -->
 <div id="header-bar">
   <!-- Navigation -->
   <nav>
@@ -23,16 +22,20 @@
     </a>
     <!-- Logged In -->
     {% if request.user.is_authenticated %}
-    <a href="#" class="profile">
-      <img src="{% static 'images/profile_pic.jpeg' %}" />
-    </a>
+    <div class="profile-container">
+      <a href="#" class="profile">
+        <img src="{% static 'images/profile_pic.jpeg' %}" id="profile-pic" />
+      </a>
+      <div class="dropdown-menu" id="dropdown-menu">
+        <a href="{% url 'profile' %}">Profile</a>
+        <a href="{% url 'logout' %}">Logout</a>
+      </div>
+    </div>
     {% else %}
     <!-- Not Logged In -->
     <a href="{% url 'login' %}">
-      <!-- <img src="{% static 'images/avatar.svg' %}" /> -->
       <p>Login</p>
     </a>
     {% endif %}
   </nav>
-  <!-- Navbar -->
 </div>

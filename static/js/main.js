@@ -41,3 +41,21 @@ darkMode.addEventListener("click", function () {
 });
 
 
+// dropdown-menu
+document.addEventListener("DOMContentLoaded", function () {
+  const profilePic = document.getElementById("profile-pic");
+  const dropdownMenu = document.getElementById("dropdown-menu");
+
+  profilePic.addEventListener("click", function (e) {
+    e.preventDefault();
+    dropdownMenu.style.display =
+      dropdownMenu.style.display === "block" ? "none" : "block";
+  });
+
+  // Klik di luar dropdown untuk menutup menu
+  window.addEventListener("click", function (e) {
+    if (!profilePic.contains(e.target) && !dropdownMenu.contains(e.target)) {
+      dropdownMenu.style.display = "none";
+    }
+  });
+});
