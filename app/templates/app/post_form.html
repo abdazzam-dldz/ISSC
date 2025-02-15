@@ -1,0 +1,15 @@
+{% extends 'main.html' %} {% block content %}
+
+<main class="postform">
+    <form class="form" method="POST" action="">
+        {% csrf_token %}
+
+
+
+        {{form.message}}
+
+        <button  type="submit">Simpan</button>
+    </form>
+</main>
+
+{% endblock %}

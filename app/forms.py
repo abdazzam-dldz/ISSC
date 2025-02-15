@@ -1,7 +1,7 @@
-from django import forms
+from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
-from app.models import User
+from app.models import User, Post
 
 
 
@@ -46,5 +46,9 @@ class RegisForm(UserCreationForm):
         return password1
 
 
+class PostForm(ModelForm):
+    class Meta:
+        model = Post
+        fields = ['message']
 
     

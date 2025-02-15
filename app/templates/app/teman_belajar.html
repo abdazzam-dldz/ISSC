@@ -1,0 +1,25 @@
+{% extends 'main.html' %} {% block content %}
+<!-- Content Services (Dummy) -->
+<main class="teman-belajar">
+  <div class="c1">
+    {% for p in user_post %}
+    <p><strong>Pengguna:</strong> {{ p.user.username }}</p>
+    <p><strong>Industri/Study:</strong> {{ p.user.studi_industri }}</p>
+    <p><strong>Dibuat:</strong> {{ p.created|date:"d M Y" }}</p>
+    <p>{{ p.message }}</p>
+    {% endfor %}
+    <br>
+    <a href="{% url 'create-post'  %}">Buat Post</a>
+  </div>
+  <div class="c2">
+    {% for p in all_post %}
+    <p><strong>Pengguna:</strong> {{ p.user.username }}</p>
+    <p><strong>Industri/Study:</strong> {{ p.user.studi_industri }}</p>
+    <p><strong>Dibuat:</strong> {{ p.created|date:"d M Y" }}</p>
+    <p>{{ p.message }}</p>
+    <br>
+    <button type="button">Kirim Pesan</button>
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}

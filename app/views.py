@@ -3,13 +3,15 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from .models import User
+from .models import User, Post
 from django.contrib.auth import authenticate, login, logout
-from .forms import RegisForm
+from .forms import RegisForm, PostForm
 
 # # Create your views here.
 def home (request):
-    return render(request, 'app/home.html')
+    header = 'Home'
+    context = {'header' : header}
+    return render(request, 'app/home.html', context)
 
 def loginPage(request):
     page = 'login'
@@ -62,3 +64,26 @@ def logoutUser(request):
 
 def userProfile(request):
     return render(request, 'app/profile.html')
+
+@login_required(login_url='login')
+def temanBelajar(request):
+    header = 'Teman Belajar'
+    user_post = Post.objects.filter(user=request.user) 
+    all_post = Post.objects.all()
+    context = {'header': header,
+               'user_post' : user_post,
+               'all_post' : all_post,}
+    return render(request, 'app/teman_belajar.html', context)
+
+@login_required(login_url='login')
+def createPost (request):
+    form = PostForm()
+    if request.method == 'POST':
+        Post.objects.create(
+            user = request.user,
+            message = request.POST.get('message'),
+        )
+        return redirect('teman-belajar')
+
+    context = {'form' : form}
+    return render(request, 'app/post_form.html', context)

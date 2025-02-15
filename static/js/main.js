@@ -1,61 +1,70 @@
-const sidebar = document.querySelector(".sidebar");
+const container = document.querySelector(".sidebar");
 const linkItems = document.querySelectorAll(".link-item");
-const darkMode = document.querySelector(".dark-mode");
+const headerItems = document.querySelectorAll(".header-item");
+const darkMode = document.querySelector(".dark-mode a"); // Pilih link dalam .dark-mode
 const logo = document.querySelector(".logo svg");
+const pageName = document.querySelector("#page-name"); // Pilih elemen page-name
 
-//sidebar Hover
-sidebar.addEventListener("mouseenter", () => {
-  sidebar.classList.add("active");
+// Container Hover
+container.addEventListener("mouseenter", () => {
+  container.classList.add("active");
+  pageName.style.marginLeft = "260px"; // Ubah margin-left saat sidebar aktif
 });
 
-//sidebar Hover Leave
-sidebar.addEventListener("mouseleave", () => {
-  sidebar.classList.remove("active");
+// Container Hover Leave
+container.addEventListener("mouseleave", () => {
+  container.classList.remove("active");
+  pageName.style.marginLeft = "85px"; // Kembalikan margin-left saat sidebar tidak aktif
 });
 
-//Link-items Clicked
-for (let i = 0; i < linkItems.length; i++) {
-  if (!linkItems[i].classList.contains("dark-mode")) {
-    linkItems[i].addEventListener("click", (e) => {
-      linkItems.forEach((linkItem) => {
-        linkItem.classList.remove("active");
-      });
-      linkItems[i].classList.add("active");
-    });
-  }
-}
+// // Link-items Clicked
+// for (let i = 0; i < linkItems.length; i++) {
+//   if (!linkItems[i].classList.contains("dark-mode")) {
+//     linkItems[i].addEventListener("click", (e) => {
+//       linkItems.forEach((linkItem) => {
+//         linkItem.classList.remove("active");
+//       });
+//       linkItems[i].classList.add("active");
+//     });
+//   }
+// }
 
 // Dark Mode Functionality
-darkMode.addEventListener("click", function () {
-  if (document.body.classList.contains("dark-mode")) {
-    // darkMode.querySelector("span").textContent = "dark mode";
-    darkMode.querySelector("ion-icon").setAttribute("name", "moon-outline");
+darkMode.addEventListener("click", function (e) {
+  e.preventDefault(); // Mencegah reload halaman saat klik link
 
-    logo.style.fill = "#363b46";
-  } else {
-    // darkMode.querySelector("span").textContent = "light mode";
-    darkMode.querySelector("ion-icon").setAttribute("name", "sunny-outline");
-    logo.style.fill = "#fff";
-  }
   document.body.classList.toggle("dark-mode");
+
+  // Ubah ikon mode gelap/terang
+  const icon = darkMode.querySelector("ion-icon");
+  if (document.body.classList.contains("dark-mode")) {
+    icon.setAttribute("name", "sunny-outline"); // Ubah ke ikon terang
+    logo.style.fill = "#fff"; // Sesuaikan warna logo
+  } else {
+    icon.setAttribute("name", "moon-outline"); // Ubah ke ikon gelap
+    logo.style.fill = "#363b46";
+  }
 });
 
 
-// dropdown-menu
 document.addEventListener("DOMContentLoaded", function () {
-  const profilePic = document.getElementById("profile-pic");
-  const dropdownMenu = document.getElementById("dropdown-menu");
+  const profileBtn = document.querySelector(".profile-btn");
+  const profileMenu = document.querySelector(".profile");
 
-  profilePic.addEventListener("click", function (e) {
-    e.preventDefault();
-    dropdownMenu.style.display =
-      dropdownMenu.style.display === "block" ? "none" : "block";
+  profileBtn.addEventListener("click", function (event) {
+      event.preventDefault();
+      profileMenu.classList.toggle("active");
+      console.log("Dropdown toggled:", profileMenu.classList.contains("active")); // Debugging
   });
 
-  // Klik di luar dropdown untuk menutup menu
-  window.addEventListener("click", function (e) {
-    if (!profilePic.contains(e.target) && !dropdownMenu.contains(e.target)) {
-      dropdownMenu.style.display = "none";
-    }
+  document.addEventListener("click", function (event) {
+      if (!profileMenu.contains(event.target) && !profileBtn.contains(event.target)) {
+          profileMenu.classList.remove("active");
+          console.log("Dropdown closed"); // Debugging
+      }
   });
 });
+
+
+
+

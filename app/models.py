@@ -24,3 +24,15 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+
+
+class Post(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    message = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)  # Timestamp saat dibuat
+    updated = models.DateTimeField(auto_now=True)      # Timestamp saat diperbarui
+
+    def __str__(self):
+        return f"{self.user.username} - {self.message_box[:30]}"
+
+

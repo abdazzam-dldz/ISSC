@@ -1,41 +1,44 @@
 {% load static %}
 
-<div id="header-bar">
-  <!-- Navigation -->
-  <nav>
-    <a href="#" class="nav-link">Header</a>
-    <form action="#">
-      <div class="form-input">
-        <input type="search" placeholder="Search..." />
-        <button type="submit" class="search-btn">
-          <i class="bx bx-search"></i>
-        </button>
-      </div>
-    </form>
-    <a href="#" class="dark-mode">
-      <ion-icon name="moon-outline"></ion-icon>
-      <span style="--i: 8"></span>
-    </a>
-    <a href="#" class="notification">
-      <i class="bx bxs-bell"></i>
-      <span class="num">8</span>
-    </a>
-    <!-- Logged In -->
-    {% if request.user.is_authenticated %}
-    <div class="profile-container">
-      <a href="#" class="profile">
-        <img src="{% static 'images/profile_pic.jpeg' %}" id="profile-pic" />
+<div class="header">
+  <a href="#" id="page-name">{{header}}</a>
+  <ul class="header-items">
+    <li class="header-item">
+      <a href="#" class="link"
+        ><ion-icon name="search-outline"></ion-icon>
       </a>
-      <div class="dropdown-menu" id="dropdown-menu">
-        <a href="{% url 'profile' %}">Profile</a>
-        <a href="{% url 'logout' %}">Logout</a>
-      </div>
-    </div>
+    </li>
+    <li class="header-item">
+      <a href="#" class="link">
+        <ion-icon class="noti-icon" name="notifications-outline"></ion-icon>
+      </a>
+    </li>
+    <li class="header-item dark-mode">
+      <a href="#" class="link">
+        <ion-icon name="moon-outline"></ion-icon>
+      </a>
+    </li>
+    {% if request.user.is_authenticated %}
+    <li class="header-item profile">
+      <a href="#" class="link profile-btn">
+        <img src="{% static 'images/user.jpeg' %} alt=""/>
+        <span>
+          <h4>John Doe</h4>
+          <p>Web Developer</p>
+        </span>
+      </a>
+      <ul class="dropdown-menu">
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">Settings</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+      </ul>
+    </li>
     {% else %}
-    <!-- Not Logged In -->
-    <a href="{% url 'login' %}">
-      <p>Login</p>
-    </a>
+    <li class="header-item login-btn">
+      <a href="{% url 'login' %}">
+        <p>Login</p>
+      </a>
+    </li>
     {% endif %}
-  </nav>
+  </ul>
 </div>

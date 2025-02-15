@@ -20,15 +20,20 @@
     </svg>
   </div>
   <ul class="link-items">
-    <li class="link-item active">
-      <a href="#" class="link">
+    <li class="link-item {% if request.path == '/' %} active {% endif %}">
+      <a href="{% url 'home'  %}" class="link">
         <ion-icon name="home-outline"></ion-icon>
         <span style="--i: 1">Beranda</span>
       </a>
     </li>
-    <li class="link-item">
-      <a href="#" class="link">
-        <ion-icon name="people-circle-outline"></ion-icon>
+    <li
+      class="link-item {% if request.path == '/teman-belajar/' %} active {% endif %}"
+    >
+      <a
+        href="{% if user.is_authenticated %}{% url 'teman-belajar' %}{% else %}{% url 'login' %}{% endif %}"
+        class="link"
+      >
+        <ion-icon name="people-outline"></ion-icon>
         <span style="--i: 2">Teman Belajar</span>
       </a>
     </li>

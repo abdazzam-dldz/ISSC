@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+
 :root {
   --primary-clr: #000000;
   --bg-clr: #f2f4f5;
@@ -9,7 +10,7 @@
 }
 body.dark-mode {
   --primary-clr: #ffffff;
-  --bg-clr: #23262bfa;
+  --bg-clr: #1e1e1e;
   --white-bg: #23262b;
   --dark-text-clr: #fff;
   --light-text-clr: #000000;
@@ -21,33 +22,30 @@ body.dark-mode {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-html {
-  overflow-x: hidden;
-}
 body {
-  /* min-height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: flex-start;  */
+  justify-content: flex-start; /* Ubah dari 'center' ke 'flex-start' */
   background: var(--bg-clr);
-  overflow-x: hidden;
 }
+/* ===================================================================================================================================== */
 
-/* Sidebar */
-/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+/* ============ SIDEBAR ============== */
 .sidebar {
-  width: 80px;
+  width: 85px;
   min-height: 500px;
   height: 100%;
   padding: 20px;
   overflow: hidden;
+  border-radius: 10px;
   background-color: var(--white-bg);
   transition: all 0.3s ease;
   position: fixed;
   top: 0;
-  left: 0;
-  z-index: 2000;
+  z-index: 1000;
 }
+
 .sidebar.active {
   width: 250px;
 }
@@ -57,11 +55,15 @@ body {
   border-bottom: 1px solid var(--primary-clr);
 }
 .sidebar ul {
+  margin-top: 35px;
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
+/* .link-item:last-child {
+  margin-top: 100px;
+} */
 .link-item a {
   display: flex;
   align-items: center;
@@ -69,10 +71,11 @@ body {
   padding: 10px;
   border-radius: 10px;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 12px;
   white-space: nowrap;
   text-transform: capitalize;
   color: var(--dark-text-clr);
+  margin-bottom: 15px;
 }
 .link-item a span {
   transition: transform 0.5s;
@@ -87,7 +90,7 @@ body {
 }
 .link-item.active a {
   color: var(--light-text-clr);
-  background-color: var(--dark-text-clr);
+  background-color: var(--primary-clr);
 }
 .link-item ion-icon {
   min-width: 20px;
@@ -95,7 +98,76 @@ body {
   margin-right: 20px;
   position: relative;
 }
-.link-item ion-icon.noti-icon::before {
+/* ===================================================================================================================================== */
+
+/* ============ Header ============== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  width: 100%;
+  height: 60px;
+  padding: 20px;
+  overflow: hidden;
+  background-color: var(--white-bg);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.header #page-name {
+  color: var(--dark-text-clr);
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 90px;
+}
+.sidebar.active ~ .header #page-name {
+  margin-left: 255px;
+}
+.header ul {
+  list-style: none;
+  display: flex;
+  gap: 8px;
+  margin-right: 25px;
+  /* background-color: black; */
+}
+.header-item {
+  display: flex;
+  align-items: center;
+}
+.header-item a {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 12px;
+  white-space: nowrap;
+  text-transform: capitalize;
+  color: var(--dark-text-clr);
+}
+.header-item a span {
+  transition: transform 0.5s;
+  transform: translateX(10px);
+}
+.header-item a span h4 {
+  line-height: 1;
+}
+.header-item a span p {
+  font-size: 12px;
+}
+.header-item ion-icon {
+  min-width: 20px;
+  min-height: 20px;
+  position: relative;
+}
+.header-item img {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+.header-item ion-icon.noti-icon::before {
   content: "";
   display: block;
   position: absolute;
@@ -107,7 +179,7 @@ body {
   background-color: var(--primary-clr);
   border: 1px solid var(--white-bg);
 }
-.link-item a .num-noti {
+.header-item a .num-noti {
   margin-left: 40px;
   font-size: 12px;
   color: var(--light-text-clr);
@@ -119,185 +191,74 @@ body {
   justify-content: center;
   border-radius: 50%;
 }
-.link-item.active a .num-noti {
+.header-item.active a .num-noti {
   color: var(--primary-clr);
   background-color: var(--white-bg);
 }
-
-/* Header Bar */
-/* ------------------------------------------------------------------------------------------------------------------------------------------- */
-#header-bar {
-  position: relative;
-  width: calc(100% - 80px);
-  left: 80px;
-  transition: 0.3s ease;
+.login-btn {
+  margin-left: 30px;
+  min-width: 70px;
+  border-radius: 10px;
+  background-color: var(--dark-text-clr);
 }
-.sidebar.active ~ #header-bar {
-  width: calc(100% - 250px);
-  left: 250px;
-}
-/* Nav */
-#header-bar nav {
-  height: 60px;
-  background: var(--white-bg);
-  padding: 0 24px;
+.login-btn a {
   display: flex;
   align-items: center;
-  grid-gap: 24px;
-  /* font-family: var(--lato); */
-  position: sticky;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-}
-#header-bar nav::before {
-  content: "";
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  bottom: -40px;
-  left: 0;
-  border-radius: 50%;
-  box-shadow: -20px -20px 0 var(--white-bg);
-}
-#header-bar nav a {
-  color: var(--dark-text-clr);
-  text-decoration: none;
-  font-weight: 600;
-}
-#header-bar nav .nav-link {
-  font-size: 16px;
-  transition: 0.3s ease;
-}
-#header-bar nav form {
-  max-width: 400px;
-  width: 100%;
-  margin-right: auto;
-  border-bottom: 1px solid var(--dark-text-clr);
-}
-#header-bar nav form .form-input {
-  display: flex;
-  align-items: center;
-  height: 36px;
-}
-#header-bar nav form .form-input input {
-  flex-grow: 1;
-  padding: 0 16px;
-  height: 100%;
-  border: none;
-  background: var(--white-bg);
-  border-radius: 36px 0 0 36px;
-  outline: none;
-  width: 100%;
-  color: var(--dark-text-clr);
-}
-#header-bar nav form .form-input button {
-  width: 36px;
-  height: 100%;
-  display: flex;
   justify-content: center;
-  align-items: center;
-  background: var(--dark-text-clr);
-  color: var(--white-bg);
-  font-size: 18px;
-  border: none;
-  outline: none;
-  border-radius: 0px 12px 0px 0px;
-  cursor: pointer;
+  width: 100%;
+  height: 100%;
 }
-#header-bar nav .notification {
-  font-size: 18px;
-  position: relative;
-}
-#header-bar nav .notification .num {
-  position: absolute;
-  top: -5px;
-  right: -7px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  color: var(--dark-text-clr);
-  font-weight: 700;
-  font-size: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#header-bar nav .switch-mode::before {
-  content: "";
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  bottom: 2px;
-  width: calc(25px - 4px);
-  background: var(--dark-text-clr);
-  border-radius: 50%;
-  transition: all 0.3s ease;
-}
-#header-bar nav #switch-mode:checked + .switch-mode::before {
-  left: calc(100% - (25px - 4px) - 2px);
-}
-#header-bar nav .profile img {
-  width: 30px;
-  height: 30px;
-  object-fit: cover;
-  border-radius: 50%;
-}
-.dark-mode ion-icon {
-  width: 20px;
-  height: 20px;
-}
-/* Dropdown */
-.profile-container {
-  position: relative;
-  display: inline-block;
-}
-.profile-container .dropdown-menu {
-  position: absolute;
-  top: 45px; 
-  right: 0;
-  display: none;
-  background-color: var(--white-bg);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* border-radius: 10px; */
-  z-index: 1000;
-  overflow: hidden;
-  padding: 10px 0;
-  width: 120px; /* Menjaga lebar tetap konsisten */
-  margin-top: 10px; /* Menambahkan margin untuk seimbang */
-}
-.dropdown-menu,
-.profile-container:focus-within .dropdown-menu {
-  display: block;
-}
-.profile-container .dropdown-menu a {
-  display: block;
-  text-decoration: none;
-  color: var(--dark-text-clr);
-  padding: 10px 15px;
+.login-btn a p {
   font-size: 14px;
-  transition: background-color 0.3s ease;
+  font-weight: 400;
+  color: var(--bg-clr);
 }
-/* Responsif */
-@media (max-width: 768px) {
-  .profile-container .dropdown-menu {
-    width: 150px;
-  }
-}
-
-
-
-/* Dummy Content */
-/* ---------------------------------------------------------------------------------------------------------------------------------------- */
-/* Content Services (DUmmy) */
-.content p {
+/* ============ Dropdown ============== */
+.profile {
   position: relative;
-  width: calc(100% - 80px);
-  left: 80px;
-  padding: 25px;
-  color: var(--primary-clr);
+  display: inline-block; /* Memastikan lebar hanya sesuai konten */
+  overflow: visible;
 }
-.sidebar.active ~ .content p {
-  width: calc(100% - 250px);
-  left: 250px;
+.dropdown-menu {
+  position: absolute;
+  top: 70px; /* Jarak dari profile picture */
+  right: 0;
+  background: var(--white-bg);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  width: 150px;
+  display: none; /* Awalnya disembunyikan */
+  z-index: 99999; /* Pastikan muncul di atas sidebar */
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  min-width: 150px;
 }
+
+.dropdown-menu li {
+  list-style: none;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: var(--dark-text-clr);
+  transition: background 0.3s ease;
+}
+
+.dropdown-menu li a:hover {
+  background: var(--hover-clr);
+}
+
+/* Aktifkan dropdown ketika ada class 'active' */
+/* Dropdown aktif */
+.profile.active .dropdown-menu {
+  position: fixed;
+  overflow: visible !important;
+  display: block !important;
+  opacity: 1;
+  transform: translateY(0);
+}
+
